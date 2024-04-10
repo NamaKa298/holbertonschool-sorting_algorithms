@@ -15,19 +15,32 @@
  */
 void selection_sort(int *array, size_t size)
 {
-	size_t i, temporaire, indice;
+	size_t i, temporaire, indice, indice_nombre_min;
+	int nombre_min;
 
-	for (indice = size - 1 ; indice > 0 ; indice--)
+	if (array == NULL || size < 2)
 	{
-		for (i = size - 1 ; i > 0; i--)
+		return;
+	}
+	for (indice = 0 ; indice < size ; indice++)
+	{
+		nombre_min = array[indice];
+		indice_nombre_min = indice;
+
+		for (i = indice ; i < size ; i++)
 		{
-			if (array[i] < (array[i - 1]))
+			if (nombre_min > (array[i]))
 			{
-				temporaire = array[i];
-				array[i] = array[i - 1];
-				array[i - 1] = temporaire;
+				nombre_min = array[i];
+				indice_nombre_min = i;
 			}
 		}
-		 print_array(array, size);
+		if (indice_nombre_min != indice)
+		{
+			temporaire = array[indice];
+			array[indice] = nombre_min;
+			array[indice_nombre_min] = temporaire;
+			print_array(array, size);
+		}
 	}
 }
